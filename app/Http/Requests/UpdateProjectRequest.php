@@ -29,7 +29,8 @@ class UpdateProjectRequest extends FormRequest
             'description' => ['required'],
             'members_num' => ['required'],
             'budget' => ['required'],
-            'type_id' => ['nullable', 'exists:types,id']
+            'type_id' => ['nullable', 'exists:types,id'],
+            'file_img' => ['nullable'],
         ];
     }
 

@@ -30,7 +30,8 @@ class StoreProjectRequest extends FormRequest
             'members_num' => ['required'],
             'budget' => ['required'],
             'type_id' => ['nullable', 'exists:types,id'],
-            'technologies' => ['exists:technologies,id']
+            'technologies' => ['exists:technologies,id'],
+            'file_img' => ['nullable', 'image', 'max:250'],
         ];
     }
 

@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relation\BelongsTo;
 
 class Project extends Model
 {
-    protected $fillable = ['title', 'type_id', 'description', 'members_num', 'budget', 'slug'];
+    protected $fillable = ['title', 'type_id', 'description', 'members_num', 'budget', 'slug', 'file_img'];
 
 
     use HasFactory;

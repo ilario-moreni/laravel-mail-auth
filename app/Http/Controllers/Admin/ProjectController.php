@@ -10,6 +10,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -48,13 +49,20 @@ class ProjectController extends Controller
 
         $form_data = $request->validated();
 
-        /* dd($form_data); */
-
+        
+        if($request->has('file_img')){
+            $path = Storage::disk('public')->put('file_img', $request->file_img);
+            
+            $form_data['file_img'] = $path;
+        }
+        
         $slug = Project::generateSlug($request->title);
-
+        
         $form_data['slug'] = $slug;
-
+        
         $newProject = new Project();
+
+        
         $newProject->fill($form_data);
 
         $newProject->save();
@@ -62,6 +70,7 @@ class ProjectController extends Controller
         if($request->has('technologies')){
             $newProject->technology()->attach($request->technologies);
         }
+
         
         return redirect()->route('admin.projects.index')->with('message', 'Post creato correttamente');
     }
@@ -101,6 +110,7 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
+        dd($form_data);
         $form_data = $request->validated();
         
         $slug = Project::generateSlug($request->title, '-');

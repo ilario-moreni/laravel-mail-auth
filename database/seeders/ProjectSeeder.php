@@ -25,6 +25,7 @@ class ProjectSeeder extends Seeder
             $newProject->members_num = $faker->numberBetween(1, 30);
             $newProject->budget = $faker->numberBetween(1000, 1000000);
             $newProject->slug = Str::slug($newProject->title, '-');
+            $newProject->file_img = $faker->imageUrl(360, 360, 'animals', true, 'dogs', true, 'jpg');
             $newProject->save();
         }
     }

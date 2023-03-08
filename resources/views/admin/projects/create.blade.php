@@ -7,7 +7,7 @@
                 <div>{{ $error }}</div>
             @endforeach
         @endif
-        <form action="{{ route('admin.projects.store') }}" method="POST">
+        <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <label for="exampleFormControlInput1" class="form-label">Title</label>
             <input name="title" type="text" class="form-control" id="title" placeholder="title">
@@ -24,11 +24,14 @@
                 @endforeach
             </select>
             <div>Technologies:</div>
-            @foreach ($technologies as $technology)
+            {{-- @foreach ($technologies as $technology)
                 <input type="checkbox" value="{{ $technology->id }}" name="technologies[]">
                 <label class="form-check-label">{{ $technology->title }}</label>
-            @endforeach
+            @endforeach --}}
             <br>
+            <label for="formFile" class="mt-3 form-label">Insert image file</label>
+            <input class="form-control" type="file" name='file_img' id="formFile">
+
             <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
             <textarea name="description" placeholder='Description of the project' class="form-control" id="description"
                 rows="3"></textarea>

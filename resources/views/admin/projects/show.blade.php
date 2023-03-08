@@ -4,6 +4,11 @@
     <div class="card mt-5">
         <div class="bg-secondary bg-gradient card-header">
             {{ $project->title }}
+            @if ($project->file_img)
+                <div class="my-4">
+                    <img src="{{ asset('storage/' . $project->file_img) }}" alt="{{ $project->title }}">
+                </div>
+            @endif
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">Field: {{ $project->type_id ? $project->type->title : 'N/D' }}</li>

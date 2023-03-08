@@ -7,7 +7,7 @@
                 <div>{{ $error }}</div>
             @endforeach
         @endif
-        <form action="{{ route('admin.projects.update', $project->slug) }}" method="POST">
+        <form action="{{ route('admin.projects.update', $project->slug) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <label for="exampleFormControlInput1" class="form-label">Title</label>
@@ -39,6 +39,10 @@
                 @endif
             @endforeach
             <br>
+            {{-- file input --}}
+            <label for="formFile" class="mt-3 form-label">Insert image file</label>
+            <input class="form-control" type="file" id="formFile">
+
             <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
             <textarea name="description" value="" placeholder='Description of the project' class="form-control"
                 id="description" rows="3">{{ old('description') ?? $project->description }}</textarea>
