@@ -24,10 +24,10 @@
                 @endforeach
             </select>
             <div>Technologies:</div>
-            {{-- @foreach ($technologies as $technology)
+            @foreach ($technologies as $technology)
                 <input type="checkbox" value="{{ $technology->id }}" name="technologies[]">
                 <label class="form-check-label">{{ $technology->title }}</label>
-            @endforeach --}}
+            @endforeach
             <br>
             <label for="formFile" class="mt-3 form-label">Insert image file</label>
             <input class="form-control" type="file" name='file_img' id="formFile">

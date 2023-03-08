@@ -68,7 +68,7 @@ class ProjectController extends Controller
         $newProject->save();
 
         if($request->has('technologies')){
-            $newProject->technology()->attach($request->technologies);
+            $newProject->technologies()->attach($request->technologies);
         }
 
         
@@ -110,13 +110,23 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        dd($form_data);
+        
         $form_data = $request->validated();
         
         $slug = Project::generateSlug($request->title, '-');
    
         $form_data['slug'] = $slug;
    
+        if($request->has('file_img')){
+            if($project->file_img){
+                Storage::delete($project->file_img);
+            }
+
+            $path = Storage::disk('public')->put('file_img', $request->file_img);
+            
+            $form_data['file_img'] = $path;
+        }
+
         $project->update($form_data);
 
         if($request->has('technologies'))

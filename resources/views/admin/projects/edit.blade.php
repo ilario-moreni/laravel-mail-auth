@@ -41,7 +41,7 @@
             <br>
             {{-- file input --}}
             <label for="formFile" class="mt-3 form-label">Insert image file</label>
-            <input class="form-control" type="file" id="formFile">
+            <input class="form-control" type="file" name='file_img' id="formFile">
 
             <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
             <textarea name="description" value="" placeholder='Description of the project' class="form-control"
