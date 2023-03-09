@@ -11,6 +11,9 @@ use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\NewContact;
+use App\Models\Lead;
+use Illuminate\Support\Facades\Mail;
 
 class ProjectController extends Controller
 {
@@ -59,17 +62,29 @@ class ProjectController extends Controller
         $slug = Project::generateSlug($request->title);
         
         $form_data['slug'] = $slug;
+
         
         $newProject = new Project();
-
+        
         
         $newProject->fill($form_data);
-
+        
         $newProject->save();
-
+        
         if($request->has('technologies')){
             $newProject->technologies()->attach($request->technologies);
         }
+        
+        $newLead = new Lead();
+        
+        $newLead->title = $form_data['title'];
+        $newLead->slug = $form_data['slug'];
+        $newLead->description = $form_data['description'];
+        
+        $newLead->save();
+        
+
+        Mail::to('info@boolpress.com')->send(new NewContact($newLead));
 
         
         return redirect()->route('admin.projects.index')->with('message', 'Post creato correttamente');
