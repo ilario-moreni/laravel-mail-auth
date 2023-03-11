@@ -18,4 +18,21 @@ class ApiProjectController extends Controller
             'projects' => $projects
         ]);
     }
+
+    public function show(){
+
+        $project = Project::where('slug', $slug);
+
+        if($project){
+            return response()->json([
+                'success' => true,
+                'project' => $project
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'project' => 'Nessun progetto trovato'
+            ]);
+        }
+    }
 }
