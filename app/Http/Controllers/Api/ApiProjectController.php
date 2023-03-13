@@ -19,9 +19,9 @@ class ApiProjectController extends Controller
         ]);
     }
 
-    public function show(){
+    public function show($slug){
 
-        $project = Project::where('slug', $slug);
+        $project = Project::where('slug', $slug)->first();
 
         if($project){
             return response()->json([
